@@ -13,13 +13,5 @@ else
     sudo apt install libayatana-appindicator3-1 gir1.2-ayatanaappindicator3-0.1 gnome-shell-extension-appindicator
 fi
 
-# Definir a variável DBUS_SESSION_BUS_ADDRESS, se não estiver definida
-if [ -z "$DBUS_SESSION_BUS_ADDRESS" ]; then
-    # Executar dbus-launch e exportar o resultado
-    dbus_address=$(dbus-launch)
-    DBUS_SESSION_BUS_ADDRESS=$(echo $dbus_address | grep -o '/tmp/dbus-[a-zA-Z0-9]\+')
-    export $DBUS_SESSION_BUS_ADDRESS
-    echo "DBUS_SESSION_BUS_ADDRESS definida como: $DBUS_SESSION_BUS_ADDRESS"
-else
-    echo "DBUS_SESSION_BUS_ADDRESS já está definida como: $DBUS_SESSION_BUS_ADDRESS"
-fi
+export $(dbus-launch)
+protonvpn
