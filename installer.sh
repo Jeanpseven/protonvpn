@@ -16,7 +16,8 @@ fi
 # Verifica se a variável DBUS_SESSION_BUS_ADDRESS está definida
 if [ -z "$DBUS_SESSION_BUS_ADDRESS" ]; then
     # Se não estiver definida, executa dbus-launch e exporta o resultado
-    eval $(dbus-launch)
+    export $(dbus-launch)
+    DBUS_SESSION_BUS_ADDRESS=$(echo $DBUS_SESSION_BUS_ADDRESS | cut -d '=' -f 2)
     echo "DBUS_SESSION_BUS_ADDRESS definida como: $DBUS_SESSION_BUS_ADDRESS"
 else
     echo "DBUS_SESSION_BUS_ADDRESS já está definida como: $DBUS_SESSION_BUS_ADDRESS"
